@@ -39,6 +39,13 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def destroy
+		find_project
+		@project.destroy
+		flash[:notice] = "Project has been deleted"
+		redirect_to root_path
+	end
+
 	private 
 
 		def project_params
