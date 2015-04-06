@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
 	def index
+		@projects = Project.all
 	end
 
 	def new
@@ -8,7 +9,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project = Project.find(params[:id])
+		find_project
 	end
 
 	def create
@@ -22,9 +23,29 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def edit
+		find_project
+	end
+
+	def update
+		find_project
+
+		if @project.update(project_params)
+			flash[:success] = "Project successfully updated"
+			redirect_to @project
+		else
+			flash.now[:alert] = "Project update failed"
+			render 'edit'
+		end
+	end
+
 	private 
 
 		def project_params
 			params.require(:project).permit(:name, :description)
+		end
+
+		def find_project
+			@project = Project.find(params[:id])
 		end
 end

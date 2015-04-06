@@ -8,7 +8,7 @@ RSpec.feature "Creating Projects" do
 	end
 
 	scenario "A user can create a new project" do
-		fill_in "Project Name", with: "Sublime Text 3"
+		fill_in "Name", with: "Sublime Text 3"
 		fill_in "Description", with: "A text editor for everyone"
 		click_button "Create Project"
 		project = Project.first
@@ -24,9 +24,24 @@ RSpec.feature "Creating Projects" do
 	end
 
 	scenario "A project must be at least 5 characters" do
-		fill_in "Project Name", with: "1234"
+		fill_in "Name", with: "1234"
 		click_button "Create Project"
 		expect(page).to have_content("Project has not been created")
 		expect(page).to have_content("Name is too short")
+	end
+
+	scenario "A project must have a description" do
+		fill_in "Name", with: "New Project"
+		click_button "Create Project"
+		expect(page).to have_content("Project has not been created")
+		expect(page).to have_content("Description can't be blank")
+	end
+
+	scenario "A project description must be at least 10 characters" do
+		fill_in "Name", with: "New Project"
+		fill_in "Description", with: "123456789"
+		click_button "Create Project"
+		expect(page).to have_content("Project has not been created")
+		expect(page).to have_content("Description is too short")
 	end
 end
