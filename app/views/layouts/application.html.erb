@@ -11,16 +11,30 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<% flash.each do |type, message| %>
-		<div>
-			<%= message %>
-		</div>
-	<% end %>
+  <nav class="navbar navbar-default navbar-fix-top">
+    <div class="container">
+      <div class="navbar-header-font">
+        <%= link_to "MageeWorld", root_path, class: "navbar-brand" %>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="<%= "active" if current_page?("/") %>">
+          <%= link_to "Home", root_path %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">	
+    <% flash.each do |type, message| %>
+  		<div class= "alert alert-<%=type %>">
+  			<%= message %>
+  		</div>
+  	<% end %>
 
 
-<%= yield %>
-
+    <%= yield %>
+  </div>
 </body>
 </html>
