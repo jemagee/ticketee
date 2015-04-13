@@ -1,6 +1,9 @@
-<div class="page-header">
-	<h1><%= @ticket.title %>
-		<small><%= @project.name %></small>
-	</h1>
+<div id="ticket">
+	<div class="page-header">
+		<h1><%= @project.name %></h1>
+	</div>
+	<div class="page-header">
+		<h2><%= @ticket.title %></h2>
+	</div>
+	<%= simple_format(@ticket.description) %>
 </div>
-<%= simple_format(@ticket.description) %>
