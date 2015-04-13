@@ -7,8 +7,9 @@
 		<li><%= link_to  "Delete Project", project_path(@project), method: :delete, data: {confirm: "Are you sure you want to delete project?"}, class: "delete" %></li>
 </div>
 <p><%= @project.description %></p>
-<% @project.tickets.each do |ticket| %>
-	<p><%= link_to ticket.title, [@project, ticket] %></p>
-
-<% end %>
+<div id="tickets">
+	<% @project.tickets.each do |ticket| %>
+		<p id="<%= ticket.id %>"><%= link_to ticket.title, [@project, ticket] %><%= link_to "Delete Ticket", [@project, ticket], method: :delete, data: {confirm: "Are you sure you want to delete this ticket?"}, class: 'delete'  %></p>
+	<% end %>
+</div>
 
