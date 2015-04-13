@@ -8,6 +8,7 @@
 </div>
 <p><%= @project.description %></p>
 <% @project.tickets.each do |ticket| %>
-	<%= link_to ticket.title, [@project, ticket] %>
+	<p><%= link_to ticket.title, [@project, ticket] %></p>
+
 <% end %>
 

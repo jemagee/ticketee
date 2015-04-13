@@ -21,6 +21,19 @@ class TicketsController < ApplicationController
 	def show
 	end
 
+	def edit
+	end
+
+	def update
+		if @ticket.update(private_params)
+			flash[:success] = "Ticket updated!"
+			redirect_to @project
+		else
+			flash[:warning] = "Ticket update failed"
+			render 'edit'
+		end
+	end
+
 	private
 
 		def get_project
