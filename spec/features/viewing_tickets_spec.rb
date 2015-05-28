@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.feature "Viewing Tickets (through projects)" do
 
 	before do
+		user = FactoryGirl.create(:user)
 		sublime = FactoryGirl.create(:project, name:"Sublime Text 3")
-		FactoryGirl.create(:ticket, project: sublime, title: "Make it shiny", description: "Gradients, Starbursts, Oh MY!")
+		FactoryGirl.create(:ticket, project: sublime, title: "Make it shiny", description: "Gradients, Starbursts, Oh MY!", author: user)
 		nba = FactoryGirl.create(:project, name: "NBA.com data scrape")
-		FactoryGirl.create(:ticket, project: nba, title: "Get JSON", description: "Hard pain in the arse to find")
+		FactoryGirl.create(:ticket, project: nba, title: "Get JSON", description: "Hard pain in the arse to find", author: user)
 		visit "/"
 	end
 

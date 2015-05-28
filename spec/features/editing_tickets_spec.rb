@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.feature "Editing Tickets" do
 
 	let!(:project) { FactoryGirl.create(:project, name: "NBA.com") }
-	let!(:ticket) { FactoryGirl.create(:ticket, project: project, title: "The PBP Project")}
+	let!(:user) { FactoryGirl.create(:user) }
+	let!(:ticket) { FactoryGirl.create(:ticket, project: project, title: "The PBP Project", author: user)}
 
 	before do
 		visit root_path

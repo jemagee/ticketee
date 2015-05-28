@@ -2,14 +2,17 @@ require 'rails_helper'
 
 RSpec.feature "Creating Tickets" do
 
+	let!(:user) { FactoryGirl.create(:user)}
+
 	before do
+		login_as(user)
 		FactoryGirl.create(:project, name: "NBA.com Project")
 		visit "/"
 		click_link "NBA.com Project"
 		click_link "New Ticket"
 	end
 
-	scenario "with valid attribtues" do
+	scenario "with valid attributes" do
 
 		fill_in "Title", with: "Finding JSON links"
 		fill_in "Description", with: "Need to isolated all raw data"
@@ -17,6 +20,9 @@ RSpec.feature "Creating Tickets" do
 		expect(page).to have_content("Ticket has been created")
 		expect(page).to have_content("Finding JSON links")
 		expect(page).to have_content("NBA.com Project")
+		within("#ticket #author") do
+			expect(page).to have_content("Created by #{user.email}")
+		end
 	end
 
 	scenario "with missing fields" do

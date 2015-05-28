@@ -9,6 +9,7 @@ class TicketsController < ApplicationController
 
 	def create
 		@ticket = @project.tickets.build(private_params)
+		@ticket.author = current_user
 		if @ticket.save
 			flash[:success] = "Ticket has been created"
 			redirect_to [@project, @ticket]

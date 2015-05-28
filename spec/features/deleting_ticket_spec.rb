@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature "Deleting a ticket properly" do
 
 	let!(:project) { FactoryGirl.create(:project) }
-	let!(:ticket) { FactoryGirl.create(:ticket, project: project, title: "Ticket 1")}
-	let!(:ticket2) { FactoryGirl.create(:ticket, project: project, title: "Ticket 2")}
+	let!(:user) { FactoryGirl.create(:user) }
+	let!(:ticket) { FactoryGirl.create(:ticket, project: project, title: "Ticket 1", author: user)}
+	let!(:ticket2) { FactoryGirl.create(:ticket, project: project, title: "Ticket 2", author: user)}
 
 	before do
 		visit root_path
