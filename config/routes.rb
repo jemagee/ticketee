@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    root "base#index"
+    resources :projects, only: [:new, :create, :destroy]
+  end
+
   devise_for :users
   root "projects#index"
-  resources :projects do
+  resources :projects, only: [:edit, :show, :index, :update] do
     resources :tickets
   end
   # The priority is based upon order of creation: first created -> highest priority.

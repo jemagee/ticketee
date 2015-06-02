@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.feature "Deleting Projects" do
 
 	before do
+		login_as(FactoryGirl.create(:user, :admin))
 		FactoryGirl.create(:project)
 		visit "/"
 		click_link "Sublime Text 3"
+		login_as(FactoryGirl.create(:user, :admin))
 	end
 
 	scenario "Deleting a post" do

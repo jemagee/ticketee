@@ -4,22 +4,7 @@ class ProjectsController < ApplicationController
 		@projects = Project.all
 	end
 
-	def new
-		@project = Project.new
-	end
-
 	def show
-	end
-
-	def create
-		@project = Project.new(project_params)
-		if @project.save
-			flash[:success] = "Project has been created."
-			redirect_to @project
-		else
-			flash.now[:warning] = "Project has not been created"
-			render 'new'
-		end
 	end
 
 	def edit
@@ -33,12 +18,6 @@ class ProjectsController < ApplicationController
 			flash.now[:warning] = "Project update failed"
 			render 'edit'
 		end
-	end
-
-	def destroy
-		@project.destroy
-		flash[:success] = "Project has been deleted"
-		redirect_to root_path
 	end
 
 	private 
