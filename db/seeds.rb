@@ -11,9 +11,9 @@ end
 unless User.exists?(email: "viewer@ticketee.com")
 	User.create!(email: "viewer@ticketee.com", password: "password")
 end
-unless Project.exists?(name: "Sublime Text 3")
-	Project.create!(name: "Sublime Text 3", description: "A sample project about Sublime Text 3")
-end
-unless Project.exists?(name: "Internet Explorer")
-	Project.create!(name: "Internet Explorer", description: "A sample project about Internet Explorer")
+
+["Sublime Text 3", "Internet Explorer"].each do |name|
+  unless Project.exists?(name: name)
+    Project.create(name: name, description: "A sample project about #{name}")
+  end
 end
