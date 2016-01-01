@@ -8,7 +8,7 @@ RSpec.feature "Creating Projects" do
 		click_link "New Project"
 	end
 
-	scenario "A user can create a new project" do
+	scenario "An Admin can create a new project" do
 		fill_in "Name", with: "Sublime Text 3"
 		fill_in "Description", with: "A text editor for everyone"
 		click_button "Create Project"
