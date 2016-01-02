@@ -1,0 +1,5 @@
+<header>
+  <h1><%= @user.email %></h1>
+</header>
+
+<%= link_to "Edit User", edit_admin_user_path(@user.id), class: "edit" %>

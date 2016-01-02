@@ -1,4 +1,6 @@
 class Admin::UsersController < Admin::BaseController
+
+  before_action :find_user, only: [:edit, :show, :update, :destroy]
   def index
     @users = User.order(:email)
   end
@@ -18,9 +20,34 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+    end
+    
+    if @user.update(get_params)
+      flash[:notice] = "User has been updated."
+      redirect_to admin_users_path
+    else
+      flash.now[:alert] = "User has not been updated."
+      render "edit"
+    end
+  end
+
   private
 
   def get_params
     params.require(:user).permit(:email, :password, :admin)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end
