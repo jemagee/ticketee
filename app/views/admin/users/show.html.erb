@@ -3,3 +3,4 @@
 </header>
 
 <%= link_to "Edit User", edit_admin_user_path(@user.id), class: "edit" %>
+<%= link_to "Archive User", [:archive, :admin, @user], method: :patch, data: {confirm: "Are you sure you want to archive #{@user.email}?"}, class: "delete" %>
