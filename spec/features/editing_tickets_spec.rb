@@ -7,6 +7,8 @@ RSpec.feature "Editing Tickets" do
 	let!(:ticket) { FactoryGirl.create(:ticket, project: project, title: "The PBP Project", author: user)}
 
 	before do
+		assign_role!(user, :viewer, project)
+		login_as(user)
 		visit root_path
 		click_link project.name
 		click_link ticket.title

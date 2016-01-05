@@ -8,6 +8,8 @@ RSpec.feature "Deleting a ticket properly" do
 	let!(:ticket2) { FactoryGirl.create(:ticket, project: project, title: "Ticket 2", author: user)}
 
 	before do
+		login_as(user)
+		assign_role!(user, :viewer, project)
 		visit root_path
 		click_link project.name
 	end

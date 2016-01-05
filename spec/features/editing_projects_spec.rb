@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "Editing/Updating Projects" do
+	let(:user) { FactoryGirl.create(:user)}
+	let(:project) {FactoryGirl.create(:project)}
 
 	before do
-		FactoryGirl.create(:project)
+		assign_role!(user, :viewer, project)
+		login_as(user)
 		visit "/"
 		click_link "Sublime Text 3"
 		click_link "Edit Project"

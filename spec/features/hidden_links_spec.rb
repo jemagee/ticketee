@@ -5,15 +5,16 @@ RSpec.feature 'hidden links' do
   let(:admin) { FactoryGirl.create(:user, :admin)}
   let(:project) { FactoryGirl.create(:project)}
 
+  before do
+    assign_role!(user, :viewer, project)
+    assign_role!(admin, :viewer, project)
+  end
+
   context "anonymous users" do
   	scenario "cannot see the New Project link" do
   		visit "/"
   		expect(page).not_to have_link "New Project"
   	end
-    scenario "cannot see the Delete Link on Project Page" do
-      visit project_path(project)
-      expect(page).not_to have_link "Delete Project"
-    end
   end
 
   context "regular users" do

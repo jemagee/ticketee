@@ -9,6 +9,9 @@ RSpec.feature "Viewing Tickets (through projects)" do
 		nba = FactoryGirl.create(:project, name: "NBA.com data scrape")
 		FactoryGirl.create(:ticket, project: nba, title: "Get JSON", description: "Hard pain in the arse to find", author: user)
 		visit "/"
+		login_as(user)
+		assign_role!(user, :viewer, sublime)
+		assign_role!(user, :viewer, nba)
 	end
 
 	scenario "For a given project" do

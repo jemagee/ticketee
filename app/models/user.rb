@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   scope :excluding_archived, lambda { where(archived_at: nil)}
 
   has_many :tickets, foreign_key: "author_id"
+  has_many :roles, dependent: :delete_all
+  has_many :projects, through: :roles
 
   def to_s
     "#{email} (#{admin? ? "Admin" : "User"})"
