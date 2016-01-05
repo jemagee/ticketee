@@ -1,8 +1,16 @@
 require 'rails_helper'
 
-RSpec.feature "Viewing Projects" do
+RSpec.feature "Users can View Projects" do
+
+  let(:user) {FactoryGirl.create(:user)}
+  let(:project) {FactoryGirl.create(:project, name: "Sublime Text 3")}
+
+  before do
+    login_as(user)
+    assign_role!(user, :viewer, project)
+  end
+
 	scenario "Listing all projects" do
-		project = FactoryGirl.create(:project)
 		visit "/"
 		click_link "Sublime Text 3"
 		expect(page.current_url).to eql(project_url(project))
