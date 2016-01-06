@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_action :find_project, only: [:show, :edit, :update]
 
 	def index
-		@projects = Project.all
+		@projects = policy_scope(Project)
 	end
 
 	def show
