@@ -11,7 +11,6 @@ RSpec.feature "Viewing Tickets (through projects)" do
 		FactoryGirl.create(:ticket, project: nba, title: "Get JSON", description: "Hard pain in the arse to find", author: user)
 		login_as(user)
 		assign_role!(user, :viewer, sublime)
-		assign_role!(user, :viewer, nba)
 	end
 
 	scenario "For a given project" do
@@ -24,5 +23,6 @@ RSpec.feature "Viewing Tickets (through projects)" do
 				expect(page).to have_content("Make it shiny")
 			end
 		expect(page).to have_content("Gradients,")
+		expect(page).to have_content("#{user.email}")
 	end
 end	
