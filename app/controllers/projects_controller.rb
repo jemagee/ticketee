@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 	before_action :find_project, only: [:show, :edit, :update]
+	before_action :authorize_project_edit, only: [:edit, :update]
 
 	def index
 		@projects = policy_scope(Project)
@@ -33,5 +34,9 @@ class ProjectsController < ApplicationController
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "The project you were looking for could not be found"
 			redirect_to root_path
+		end
+
+		def authorize_project_edit
+			authorize @project, :update?
 		end
 end
