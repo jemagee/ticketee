@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
 
 	before_action :get_project
 	before_action :get_ticket, only: [:edit, :update, :show, :destroy]
+	before_action :authorize_change, only: [:edit, :update]
 
 	def new
 		@ticket = @project.tickets.build
@@ -55,5 +56,9 @@ class TicketsController < ApplicationController
 
 		def get_ticket
 			@ticket = @project.tickets.find(params[:id])
+		end
+
+		def authorize_change
+			authorize @ticket, :update?
 		end
 end
