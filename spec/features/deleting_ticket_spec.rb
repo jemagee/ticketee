@@ -9,7 +9,7 @@ RSpec.feature "Deleting a ticket properly" do
 
 	before do
 		login_as(user)
-		assign_role!(user, :viewer, project)
+		assign_role!(user, :manager, project)
 		visit root_path
 		click_link project.name
 	end

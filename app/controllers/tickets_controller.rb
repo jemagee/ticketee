@@ -39,6 +39,7 @@ class TicketsController < ApplicationController
 	end
 
 	def destroy
+		authorize @ticket, :destroy?
 		@ticket.destroy
 		flash[:success] = "Ticket Deleted"
 		redirect_to @project
