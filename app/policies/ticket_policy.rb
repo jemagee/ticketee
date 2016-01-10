@@ -6,6 +6,6 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user.try(:admin?) || record.project.roles.exists?(user_id: user)
   end
 end
