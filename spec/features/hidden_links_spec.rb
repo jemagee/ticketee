@@ -31,6 +31,10 @@ RSpec.feature 'hidden links' do
       visit project_path(project)
       expect(page).not_to have_link "Edit Project"
     end
+    scenario "Can not see the new ticket link on Project Page" do
+      visit project_path(project)
+      expect(page).not_to have_link "New Ticket"
+    end
   end
 
   context "admin users" do
@@ -46,6 +50,10 @@ RSpec.feature 'hidden links' do
     scenario "can see the Edit Link on Project Page" do
       visit project_path(project)
       expect(page).to have_link "Edit Project"
+    end
+    scenario "can see the New Ticket Link" do
+      visit project_path(project)
+      expect(page).to have_link "New Ticket"
     end
   end
 
@@ -64,9 +72,13 @@ RSpec.feature 'hidden links' do
       visit project_path(project)
       expect(page).not_to have_link "Delete Project"
     end
-    scenario "can the Edit Link on Project Page" do
+    scenario "can see the Edit Link on Project Page" do
       visit project_path(project)
       expect(page).to have_link "Edit Project"
+    end
+    scenario "can see the New Ticket Link on Project Page" do
+      visit project_path(project)
+      expect(page).to have_link "New Ticket"
     end
   end
 
