@@ -7,7 +7,7 @@ RSpec.feature "Creating Tickets" do
 	before do
 		login_as(user)
 		project = FactoryGirl.create(:project, name: "NBA.com Project")
-		assign_role!(user, :viewer, project)
+		assign_role!(user, :editor, project)
 		visit "/"
 		click_link "NBA.com Project"
 		click_link "New Ticket"

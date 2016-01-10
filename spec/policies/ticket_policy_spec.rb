@@ -14,6 +14,7 @@ RSpec.describe TicketPolicy do
       let(:user) { nil }
 
       it { should_not permit_action :show }
+      it { should_not permit_action :create }
 
     end
 
@@ -22,6 +23,7 @@ RSpec.describe TicketPolicy do
       before { assign_role!(user, :viewer, project) }
 
       it { should permit_action :show }
+      it { should_not permit_action :create }
 
     end
 
@@ -30,6 +32,7 @@ RSpec.describe TicketPolicy do
       before { assign_role!(user, :editor, project) }
 
       it { should permit_action :show }
+      it { should permit_action :create}
 
     end
 
@@ -38,6 +41,7 @@ RSpec.describe TicketPolicy do
       before { assign_role!(user, :manager, project) }
 
       it { should permit_action :show }
+      it { should permit_action :create }
 
     end
 
@@ -46,6 +50,7 @@ RSpec.describe TicketPolicy do
       before { assign_role!(user, :manager, FactoryGirl.create(:project)) }
 
       it { should_not permit_action :show }
+      it { should_not permit_action :create }
 
     end
 
@@ -54,6 +59,7 @@ RSpec.describe TicketPolicy do
       let(:user) { FactoryGirl.create(:user, :admin) }
 
       it { should permit_action :show }
+      it { should permit_action :create }
 
     end
   end
